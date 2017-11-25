@@ -1,7 +1,7 @@
 Project generated with SPRING INITIALIZR https://start.spring.io/
 
 1. Run Spring boot application with gradlew command:
-    ./gradlew bootRun
+```./gradlew bootRun```
 2. Open http://localhost:8080/users
 
 Finish this project following these steps:
