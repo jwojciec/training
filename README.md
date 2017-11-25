@@ -1,4 +1,4 @@
-Build status: https://travis-ci.org/jwojciec/training.svg?branch=master
+Build status: [![Build Status](https://travis-ci.org/jwojciec/training.svg?branch=master)](https://travis-ci.org/jwojciec/training)
 
 Project generated with SPRING INITIALIZR https://start.spring.io/
 
