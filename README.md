@@ -1,3 +1,5 @@
+Build status: https://travis-ci.org/jwojciec/training.svg?branch=master
+
 Project generated with SPRING INITIALIZR https://start.spring.io/
 
 1. Run Spring boot application with gradlew command:
