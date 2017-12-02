@@ -24,10 +24,8 @@ public class SimpleListRepository {
         return USER_LIST.get(id);
     }
 
-    //ToDo Implement all other methods:
-    public void deleteUser(int id) {
-    }
+    public void deleteUser(int id) { USER_LIST.remove(id);}
 
-    public void addUser(User user) {
-    }
+    public void addUser(User user) { USER_LIST.add(user);}
+
 }

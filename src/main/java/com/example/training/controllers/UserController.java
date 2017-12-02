@@ -32,11 +32,9 @@ public class UserController {
         return repository.getUser(id);
     }
 
-    //ToDo implement all other methods:
-    public void deleteUser(@PathVariable int id) {
-    }
-
-    public void addUser(@RequestBody User user){
-    }
+    @RequestMapping(value ="/delete/{id}", method = RequestMethod.DELETE)
+    public void deleteUser(@PathVariable int id) { repository.deleteUser(id); }
+    @RequestMapping(value = "/add",method = RequestMethod.PUT)
+    public void addUser(@RequestBody User user){ repository.addUser(user);}
 
 }
