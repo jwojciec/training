@@ -34,7 +34,7 @@ public class UserController {
 
     @RequestMapping(value ="/delete/{id}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable int id) { repository.deleteUser(id); }
-    @RequestMapping(value = "/add",method = RequestMethod.PUT)
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
     public void addUser(@RequestBody User user){ repository.addUser(user);}
 
 }

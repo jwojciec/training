@@ -2,6 +2,8 @@ package com.example.training.controllers;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standaloneSetup;
@@ -9,12 +11,15 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.standal
 import java.io.FileReader;
 import java.io.IOException;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -28,7 +33,9 @@ public class UserControllerTest {
     private static final String SINGLE_USER_PATH = "src/test/resources/user/singleUser.json";
     private static final User TEST_USER1 = new User("2a3993ee-d74e-42ac-af90-9390642db803", "John", "Doe");
     private static final User TEST_USER2 = new User("8644d523-eaf2-412b-87b9-82ceba72ec6b", "Foo", "Bar");
+    private static final User TEST_USER_TO_ADD = new User("8644d523-eaf2-412b-87349-82ceba72ec6b","Jakub","Przybyla");
     private MockMvc mockMvc;
+    ObjectMapper objectMapper = new ObjectMapper();
 
     @Mock
     private SimpleListRepository simpleListRepository;
@@ -56,6 +63,20 @@ public class UserControllerTest {
     }
 
     //ToDo implement unit tests for UserController
+    @Test
+    public void When_addingUser_Expect_CorrectResponse() throws Exception {
+        this.mockMvc.perform(post("/users/add")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(TEST_USER_TO_ADD)))
+                .andExpect(status().isOk());
+
+    }
+    @Test
+    public void When_deletingUser_Expect_CorrectResponse() throws Exception {
+        this.mockMvc.perform(delete("/users/delete/1"))
+                .andExpect(status().isOk())
+                .andReturn() ;
+    }
 
     private static String readJsonFile(String path) throws IOException, ParseException {
         return new JSONParser().parse(new FileReader(path)).toString();
