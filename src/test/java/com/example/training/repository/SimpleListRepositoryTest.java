@@ -10,7 +10,7 @@ import com.example.training.model.User;
 public class SimpleListRepositoryTest {
     private static final SimpleListRepository REPOSITORY = new SimpleListRepository();
     private static final User TEST_USER = new User("4", "Jon", "Snow");
-    private static final User NEW_TEST_USER = new User("5", "Jakub", "Przybyla");
+    private static final User NEW_TEST_USER = new User("5", "Jim", "Ziggy");
     @Test
     public void When_GettingAllUsers_Expect_CorrectResult() {
         assertThat(REPOSITORY.getAllUsers().size(), is(4));
@@ -28,10 +28,13 @@ public class SimpleListRepositoryTest {
     public void When_AddingUser_Expect_CorrectResult() {
         REPOSITORY.addUser(NEW_TEST_USER);
         assertThat(REPOSITORY.getAllUsers().size(), is(5));
+        // rollback new user
+        REPOSITORY.deleteUser(4);
     }
     @Test
     public void When_DeletingUser_Expect_CorrectResult() {
-        REPOSITORY.deleteUser(1);
+       REPOSITORY.deleteUser(3);
         assertThat(REPOSITORY.getAllUsers().size(), is(3));
+        REPOSITORY.addUser(TEST_USER);
     }
 }
