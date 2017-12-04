@@ -31,5 +31,4 @@ public class SimpleListRepository {
     public void addUser(User user) {
         USER_LIST.add(user);
     }
-
 }

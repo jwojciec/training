@@ -33,8 +33,8 @@ public class UserControllerTest {
     private static final User TEST_USER1 = new User("2a3993ee-d74e-42ac-af90-9390642db803", "John", "Doe");
     private static final User TEST_USER2 = new User("8644d523-eaf2-412b-87b9-82ceba72ec6b", "Foo", "Bar");
     private static final User TEST_USER_TO_ADD = new User("8644d523-eaf2-412b-87349-82ceba72ec6b", "Joe", "Ziggy");
-    private MockMvc mockMvc;
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+    private MockMvc mockMvc;
 
     @Mock
     private SimpleListRepository simpleListRepository;
