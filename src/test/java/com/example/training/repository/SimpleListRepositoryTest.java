@@ -29,7 +29,6 @@ public class SimpleListRepositoryTest {
     public void When_AddingUser_Expect_CorrectResult() {
         REPOSITORY.addUser(NEW_TEST_USER);
         assertThat(REPOSITORY.getAllUsers().size(), is(5));
-        // rollback new user
         REPOSITORY.deleteUser(NEW_TEST_USER_ID);
     }
 
