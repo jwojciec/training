@@ -11,6 +11,9 @@ public class User {
         this.surname = surname;
     }
 
+    public User() {
+    }
+
     public String getId() {
         return id;
     }

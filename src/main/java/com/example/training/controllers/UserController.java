@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.training.model.User;
 import com.example.training.repository.SimpleListRepository;
 
@@ -32,11 +31,14 @@ public class UserController {
         return repository.getUser(id);
     }
 
-    //ToDo implement all other methods:
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public void deleteUser(@PathVariable int id) {
+        repository.deleteUser(id);
     }
 
-    public void addUser(@RequestBody User user){
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public void addUser(@RequestBody User user) {
+        repository.addUser(user);
     }
 
 }
