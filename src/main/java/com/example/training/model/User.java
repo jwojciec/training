@@ -1,18 +1,21 @@
 package com.example.training.model;
 
-import java.io.Serializable;
 
-public class User implements Serializable {
+public class User {
+
     private String id;
     private String name;
     private String surname;
 
-    public User(String id, String name, String surname)  {
+    public User(String id, String name, String surname) {
         this.id = id;
         this.name = name;
         this.surname = surname;
     }
-    public User(){}
+
+    public User() {
+    }
+
     public String getId() {
         return id;
     }

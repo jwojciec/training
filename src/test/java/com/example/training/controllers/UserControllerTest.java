@@ -18,7 +18,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -33,9 +32,9 @@ public class UserControllerTest {
     private static final String SINGLE_USER_PATH = "src/test/resources/user/singleUser.json";
     private static final User TEST_USER1 = new User("2a3993ee-d74e-42ac-af90-9390642db803", "John", "Doe");
     private static final User TEST_USER2 = new User("8644d523-eaf2-412b-87b9-82ceba72ec6b", "Foo", "Bar");
-    private static final User TEST_USER_TO_ADD = new User("8644d523-eaf2-412b-87349-82ceba72ec6b","Jakub","Przybyla");
+    private static final User TEST_USER_TO_ADD = new User("8644d523-eaf2-412b-87349-82ceba72ec6b", "Joe", "Ziggy");
     private MockMvc mockMvc;
-    ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     @Mock
     private SimpleListRepository simpleListRepository;
@@ -51,31 +50,31 @@ public class UserControllerTest {
     @Test
     public void When_GettingAllUsers_Expect_CorrectResponse() throws Exception {
         this.mockMvc.perform(get("/users"))
-            .andExpect(status().isOk())
-            .andExpect(content().json(readJsonFile(ALL_USERS_PATH)));
+                .andExpect(status().isOk())
+                .andExpect(content().json(readJsonFile(ALL_USERS_PATH)));
     }
 
     @Test
     public void When_GettingUserById_Expect_CorrectResponse() throws Exception {
         this.mockMvc.perform(get("/users/1"))
-            .andExpect(status().isOk())
-            .andExpect(content().json(readJsonFile(SINGLE_USER_PATH)));
+                .andExpect(status().isOk())
+                .andExpect(content().json(readJsonFile(SINGLE_USER_PATH)));
     }
 
-    //ToDo implement unit tests for UserController
     @Test
     public void When_addingUser_Expect_CorrectResponse() throws Exception {
         this.mockMvc.perform(post("/users/add")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(TEST_USER_TO_ADD)))
+                .content(OBJECT_MAPPER.writeValueAsString(TEST_USER_TO_ADD)))
                 .andExpect(status().isOk());
 
     }
+
     @Test
     public void When_deletingUser_Expect_CorrectResponse() throws Exception {
         this.mockMvc.perform(delete("/users/delete/1"))
                 .andExpect(status().isOk())
-                .andReturn() ;
+                .andReturn();
     }
 
     private static String readJsonFile(String path) throws IOException, ParseException {
