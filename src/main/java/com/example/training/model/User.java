@@ -1,6 +1,11 @@
 package com.example.training.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class User {
+    @Id
     private String id;
     private String name;
     private String surname;
@@ -9,6 +14,10 @@ public class User {
         this.id = id;
         this.name = name;
         this.surname = surname;
+    }
+
+    public User() {
+
     }
 
     public String getId() {

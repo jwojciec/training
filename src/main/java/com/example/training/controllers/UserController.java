@@ -2,25 +2,21 @@ package com.example.training.controllers;
 
 import java.util.List;
 
+import com.example.training.repository.H2Repository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import com.example.training.model.User;
-import com.example.training.repository.SimpleListRepository;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
-    private final SimpleListRepository repository;
+    private final H2Repository repository;
 
     @Autowired
-    public UserController(SimpleListRepository repository) {
-        this.repository = repository;
+    public UserController(H2Repository repo) {
+        this.repository = repo;
     }
+
 
     @RequestMapping(method = RequestMethod.GET)
     public List<User> getAllUsers() {
@@ -28,15 +24,18 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public User getUser(@PathVariable int id) {
-        return repository.getUser(id);
+    public User getUser(@PathVariable String id) {
+        return repository.getUserById(id);
     }
 
-    //ToDo implement all other methods:
-    public void deleteUser(@PathVariable int id) {
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public void deleteUser(@PathVariable String id) {
+        repository.delete(id);
     }
 
-    public void addUser(@RequestBody User user){
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public void addUser(@RequestBody User user) {
+        repository.add(user);
     }
 
 }
